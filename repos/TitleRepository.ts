@@ -1,0 +1,17 @@
+import Repository from "~/repos/Repository";
+import type PaginatedCollection from "~/types/PaginatedCollection";
+import type Resource from "~/types/Resource";
+
+export default class TitleRepository extends Repository {
+    public index(page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(`title.index.${page}`, '/titles?' + querify({page}).toString());
+    }
+
+    public show(id: number) {
+        return this.client.getData<Resource<any>>(`title.show.${id}`, `/titles/${id}`);
+    }
+
+    public comics(id: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(`title.show.${id}.comics.index.${page}`, `/titles/${id}/comics?` + querify({page}).toString());
+    }
+}
