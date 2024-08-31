@@ -52,34 +52,7 @@ if (
         </UCard>
 
         <PaginatedCards v-if="comics" :items="comics" v-slot="{item}" v-model="page">
-            <NuxtLink :to="`/comics/${item.id}/${slugify(item.title)}`">
-                <UCard class="overflow-clip"
-                       :ui="{body: {padding: ''}}">
-                    <template #header>
-                        <h3 class="font-semibold text-xl truncate">{{ item.title }}</h3>
-                    </template>
-
-                    <img :src="fileUrl(item.preview)" class="w-full h-full"/>
-
-                    <template #footer>
-                        <p>
-                            <span class="font-semibold">Views:</span>
-                            {{ item.views }}
-                        </p>
-
-                        <p>
-                            <span class="font-semibold">Pages:</span>
-                            {{ item.pages_count }}
-                        </p>
-
-                        <div v-if="item.tags.length > 0"
-                             class="flex flex-wrap items-center gap-1.5">
-                            <span class="font-semibold">Tags:</span>
-                            <TagBadge v-for="tag in item.tags">{{ tag.name }}</TagBadge>
-                        </div>
-                    </template>
-                </UCard>
-            </NuxtLink>
+            <ComicCard :item="item"/>
         </PaginatedCards>
     </div>
 </template>

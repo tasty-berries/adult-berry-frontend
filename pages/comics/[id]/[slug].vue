@@ -64,13 +64,21 @@ if (slugify(comic.value?.data.title) !== slug)
                     <div v-if="comic?.data.tags.length > 0"
                          class="flex flex-wrap items-center gap-1.5">
                         <span class="font-semibold">Tags:</span>
-                        <TagBadge v-for="tag in comic?.data.tags ?? []">{{ tag.name }}</TagBadge>
+                        <TagBadge v-for="tag in comic?.data.tags ?? []"
+                                  :key="tag.id"
+                                  :to="`/tags/${tag.id}-${slugify(tag.name)}`">
+                            {{ tag.name }}
+                        </TagBadge>
                     </div>
 
                     <div v-if="comic?.data.characters.length > 0"
                          class="flex flex-wrap items-center gap-1.5">
                         <span class="font-semibold">Characters:</span>
-                        <TagBadge v-for="character in comic?.data.characters ?? []">{{ character.name }}</TagBadge>
+                        <TagBadge v-for="character in comic?.data.characters ?? []"
+                                  :key="character.id"
+                                  :to="`/characters/${character.id}-${slugify(character.name)}`">
+                            {{ character.name }}
+                        </TagBadge>
                     </div>
                 </div>
             </template>
