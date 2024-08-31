@@ -27,12 +27,13 @@ const links = computed(() => [{
 </script>
 
 <template>
-    <div class="flex flex-col gap-5">
-        <UCard>
+    <div class="flex flex-col">
+        <UCard class="mb-2.5">
             <h1 class="text-2xl font-semibold">{{ character?.data.name }}</h1>
         </UCard>
 
-        <UHorizontalNavigation :links="links" class="border-b border-gray-200 dark:border-gray-800"/>
+        <UHorizontalNavigation :links="links"
+                               class="border-b border-gray-200 dark:border-gray-800 mb-5"/>
 
         <NuxtPage :character="character?.data"/>
     </div>
