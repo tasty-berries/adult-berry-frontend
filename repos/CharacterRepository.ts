@@ -18,4 +18,11 @@ export default class CharacterRepository extends Repository {
     public tags(id: number, page: number = 1) {
         return this.client.getData<PaginatedCollection<any>>(`character.show.${id}.tags.index.${page}`, `/characters/${id}/tags?` + querify({page}).toString());
     }
+
+    public tagComics(characterId: number, tagId: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(
+            `character.show.${characterId}.tags.show.${tagId}.comics.index`,
+            `/characters/${characterId}/tags/${tagId}?` + querify({page}).toString()
+        );
+    }
 }

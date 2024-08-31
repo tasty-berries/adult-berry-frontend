@@ -35,7 +35,7 @@ watch(page, (value, oldValue) => {
         </Head>
 
         <PaginatedCards v-if="tags" :items="tags" v-slot="{item}" v-model="page">
-            <NuxtLink :to="``">
+            <NuxtLink :to="`/characters/${characterId}-${characterSlug}/${item.id}-${slugify(item.name)}`">
                 <UCard class="overflow-clip"
                        :ui="{body: {padding: ''}}">
                     <template #header>
