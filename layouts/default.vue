@@ -26,6 +26,10 @@ const links = computed(() => [{
             <template #logo>
                 Adult Berry
             </template>
+
+            <template #right>
+                <UColorModeButton />
+            </template>
         </UHeader>
 
         <UContainer class="py-5">
