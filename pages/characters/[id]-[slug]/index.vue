@@ -24,6 +24,9 @@ const links = computed(() => [{
     to    : `/characters/${characterId}-${characterSlug}/tags`,
     active: route.path.startsWith(`/characters/${characterId}-${characterSlug}/tags`)
 }]);
+
+if (`${character.value?.data.id}-${slugify(character.value?.data.name)}` !== `${characterId}-${characterSlug}`)
+    await navigateTo(`/characters/${character.value?.data.id}-${slugify(character.value?.data.name)}`);
 </script>
 
 <template>

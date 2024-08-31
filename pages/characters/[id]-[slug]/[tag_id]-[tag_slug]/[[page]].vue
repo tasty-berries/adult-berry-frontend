@@ -32,6 +32,13 @@ watch(page, (value, oldValue) => {
 
     navigateTo(`/characters/${characterId}-${characterSlug}/${tagId}-${tagSlug}/${value}`);
 });
+
+if (
+    `${character.value?.data.id}-${slugify(character.value?.data.name)}/${tag.value?.data.id}-${slugify(tag.value?.data.name)}`
+    !==
+    `${characterId}-${characterSlug}/${tagId}-${tagSlug}`
+)
+    await navigateTo(`/characters/${character.value?.data.id}-${slugify(character.value?.data.name)}/${tag.value?.data.id}-${slugify(tag.value?.data.name)}`);
 </script>
 
 <template>
