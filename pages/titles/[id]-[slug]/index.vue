@@ -19,6 +19,14 @@ const links = computed(() => [{
     label : 'Comics',
     to    : `/titles/${titleId}-${titleSlug}`,
     active: /^\/titles\/\d+-[-a-z0-9]+(\/\d+)?$/.test(route.path)
+}, {
+    label : 'Characters',
+    to    : `/titles/${titleId}-${titleSlug}/characters`,
+    active: route.path.startsWith(`/titles/${titleId}-${titleSlug}/characters`)
+}, {
+    label : 'Tags',
+    to    : `/titles/${titleId}-${titleSlug}/tags`,
+    active: route.path.startsWith(`/titles/${titleId}-${titleSlug}/tags`)
 }]);
 
 if (`${title.value?.data.id}-${slugify(title.value?.data.name)}` !== `${titleId}-${titleSlug}`)
@@ -26,7 +34,7 @@ if (`${title.value?.data.id}-${slugify(title.value?.data.name)}` !== `${titleId}
 </script>
 
 <template>
-    <div class="flex flex-col">
+    <div>
         <UCard class="mb-2.5">
             <h1 class="text-2xl font-semibold">{{ title?.data.name }}</h1>
         </UCard>
