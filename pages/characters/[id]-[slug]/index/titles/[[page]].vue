@@ -18,24 +18,24 @@ const characterId   = parseInt(route.params.id as string);
 const characterSlug = route.params.slug as string;
 const page          = ref<number>(routePage ? routePage : 1);
 
-const {data: tags} = await repo.tags(characterId, page.value);
+const {data: titles} = await repo.titles(characterId, page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
         return;
 
-    navigateTo(`/characters/${characterId}-${characterSlug}/tags/${value}`);
+    navigateTo(`/characters/${characterId}-${characterSlug}/titles/${value}`);
 });
 </script>
 
 <template>
     <div>
         <Head>
-            <title>{{ page > 1 ? `Page ${page} // ` : '' }}{{ character.name }} // Character tags</title>
+            <title>{{ page > 1 ? `Page ${page} // ` : '' }}{{ character.name }} // Character titles</title>
         </Head>
 
-        <PaginatedCards v-if="tags" :items="tags" v-slot="{item}" v-model="page">
-            <NuxtLink :to="`/characters/${characterId}-${characterSlug}/tags/${item.id}-${slugify(item.name)}`">
+        <PaginatedCards v-if="titles" :items="titles" v-slot="{item}" v-model="page">
+            <NuxtLink :to="`/titles/${item.id}-${slugify(item.name)}/characters/${characterId}-${characterSlug}`">
                 <UCard class="overflow-clip"
                        :ui="{body: {padding: ''}}">
                     <template #header>

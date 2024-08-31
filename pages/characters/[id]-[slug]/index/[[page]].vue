@@ -29,7 +29,7 @@ watch(page, (value, oldValue) => {
 </script>
 
 <template>
-    <div class="flex flex-col gap-5">
+    <div>
         <Head>
             <title>{{ page > 1 ? `Page ${page} // ` : '' }}{{ character.name }} // Character comics</title>
         </Head>

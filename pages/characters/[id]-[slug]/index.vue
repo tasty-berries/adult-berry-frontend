@@ -23,6 +23,10 @@ const links = computed(() => [{
     label : 'Tags',
     to    : `/characters/${characterId}-${characterSlug}/tags`,
     active: route.path.startsWith(`/characters/${characterId}-${characterSlug}/tags`)
+}, {
+    label : 'Titles',
+    to    : `/characters/${characterId}-${characterSlug}/titles`,
+    active: route.path.startsWith(`/characters/${characterId}-${characterSlug}/titles`)
 }]);
 
 if (`${character.value?.data.id}-${slugify(character.value?.data.name)}` !== `${characterId}-${characterSlug}`)
@@ -30,7 +34,7 @@ if (`${character.value?.data.id}-${slugify(character.value?.data.name)}` !== `${
 </script>
 
 <template>
-    <div class="flex flex-col">
+    <div>
         <UCard class="mb-2.5">
             <h1 class="text-2xl font-semibold">{{ character?.data.name }}</h1>
         </UCard>

@@ -23,6 +23,10 @@ const links = computed(() => [{
     label : 'Characters',
     to    : `/tags/${tagId}-${tagSlug}/characters`,
     active: route.path.startsWith(`/tags/${tagId}-${tagSlug}/characters`)
+}, {
+    label : 'Titles',
+    to    : `/tags/${tagId}-${tagSlug}/titles`,
+    active: route.path.startsWith(`/tags/${tagId}-${tagSlug}/titles`)
 }]);
 
 if (`${tag.value?.data.id}-${slugify(tag.value?.data.name)}` !== `${tagId}-${tagSlug}`)

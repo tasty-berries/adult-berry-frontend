@@ -18,4 +18,8 @@ export default class TagRepository extends Repository {
     public characters(id: number, page: number = 1) {
         return this.client.getData<PaginatedCollection<any>>(`tag.show.${id}.characters.index.${page}`, `/tags/${id}/characters?` + querify({page}).toString());
     }
+
+    public titles(id: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(`tag.show.${id}.titles.index.${page}`, `/tags/${id}/titles?` + querify({page}).toString());
+    }
 }

@@ -24,13 +24,13 @@ const page          = ref<number>(routePage ? routePage : 1);
 
 const {data: character} = await characterRepo.show(characterId);
 const {data: tag}       = await tagRepo.show(tagId);
-const {data: comics}    = await characterRepo.tagComics(characterId, tagId);
+const {data: comics}    = await characterRepo.tagComics(characterId, tagId, page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
         return;
 
-    navigateTo(`/characters/${characterId}-${characterSlug}/${tagId}-${tagSlug}/${value}`);
+    navigateTo(`/characters/${characterId}-${characterSlug}/tags/${tagId}-${tagSlug}/${value}`);
 });
 
 if (
@@ -38,7 +38,7 @@ if (
     !==
     `${characterId}-${characterSlug}/${tagId}-${tagSlug}`
 )
-    await navigateTo(`/characters/${character.value?.data.id}-${slugify(character.value?.data.name)}/${tag.value?.data.id}-${slugify(tag.value?.data.name)}`);
+    await navigateTo(`/characters/${character.value?.data.id}-${slugify(character.value?.data.name)}/tags/${tag.value?.data.id}-${slugify(tag.value?.data.name)}`);
 </script>
 
 <template>
