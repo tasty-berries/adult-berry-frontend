@@ -9,6 +9,10 @@ const links = computed(() => [{
     label : 'Characters',
     to    : '/characters',
     active: route.path.startsWith('/characters')
+}, {
+    label : 'Tags',
+    to    : '/tags',
+    active: route.path.startsWith('/tags')
 }]);
 </script>
 
