@@ -26,7 +26,7 @@ if (slugify(comic.value?.data.title) !== slug)
             <title>{{ comic?.data.title }} // Comics</title>
         </Head>
 
-        <UCard>
+        <UCard :ui="{body: {padding: ''}}">
             <template #header>
                 <div class="flex gap-5">
                     <div class="w-[80px] h-[100px] bg-contain bg-center bg-no-repeat"
@@ -60,7 +60,7 @@ if (slugify(comic.value?.data.title) !== slug)
 
             <UCarousel :items="comic?.data.pages.map((page: any) => fileUrl(page.image)) ?? []"
                        :ui="{ item: 'basis-full' }"
-                       class="rounded-lg overflow-hidden bg-gray-900 p-5"
+                       class="overflow-hidden bg-gray-900 p-5"
                        :prev-button="{icon: 'i-heroicons-chevron-left', color: 'emerald'}"
                        :next-button="{icon: 'i-heroicons-chevron-right', color: 'emerald'}"
                        arrows>
