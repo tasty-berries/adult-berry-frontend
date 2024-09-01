@@ -19,10 +19,21 @@ export default class AuthorRepository extends Repository {
         return this.client.getData<PaginatedCollection<any>>(`author.show.${id}.characters.index.${page}`, `/authors/${id}/characters?` + querify({page}).toString());
     }
 
+    public tags(id: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(`author.show.${id}.tags.index.${page}`, `/authors/${id}/tags?` + querify({page}).toString());
+    }
+
     public characterComics(authorId: number, characterId: number, page: number = 1) {
         return this.client.getData<PaginatedCollection<any>>(
             `author.show.${authorId}.characters.show.${characterId}.comics.index`,
             `/authors/${authorId}/characters/${characterId}?` + querify({page}).toString()
+        );
+    }
+
+    public tagComics(authorId: number, tagId: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(
+            `author.show.${authorId}.tags.show.${tagId}.comics.index`,
+            `/authors/${authorId}/tags/${tagId}?` + querify({page}).toString()
         );
     }
 }
