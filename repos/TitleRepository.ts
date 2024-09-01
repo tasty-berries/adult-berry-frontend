@@ -23,6 +23,10 @@ export default class TitleRepository extends Repository {
         return this.client.getData<PaginatedCollection<any>>(`title.show.${id}.tags.index.${page}`, `/titles/${id}/tags?` + querify({page}).toString());
     }
 
+    public authors(id: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(`title.show.${id}.authors.index.${page}`, `/titles/${id}/authors?` + querify({page}).toString());
+    }
+
     public characterComics(titleId: number, characterId: number, page: number = 1) {
         return this.client.getData<PaginatedCollection<any>>(
             `title.show.${titleId}.characters.show.${characterId}.comics.index`,
