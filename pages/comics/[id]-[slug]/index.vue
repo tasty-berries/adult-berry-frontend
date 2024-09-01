@@ -29,10 +29,10 @@ if (slugify(comic.value?.data.title) !== slug)
         <UCard :ui="{body: {padding: ''}}">
             <template #header>
                 <div class="flex gap-5">
-                    <div class="w-[80px] h-[100px] bg-contain bg-center bg-no-repeat"
+                    <div class="w-[110px] h-[150px] bg-contain bg-center bg-no-repeat"
                          :style="`background-image: url(${fileUrl(comic?.data.preview)})`"></div>
 
-                    <div>
+                    <div class="flex flex-col gap-1.5">
                         <h1 class="font-semibold text-2xl">{{ comic?.data.title }}</h1>
 
                         <p>
@@ -44,6 +44,14 @@ if (slugify(comic.value?.data.title) !== slug)
                             <span class="font-semibold">Pages:</span>
                             {{ comic?.data.pages.length }}
                         </p>
+
+                        <div v-if="comic?.data.author"
+                             class="flex flex-wrap items-center gap-1.5">
+                            <span class="font-semibold">Author:</span>
+                            <TagBadge :to="`/authors/${comic.data.author.id}-${slugify(comic.data.author.name)}`">
+                                {{ comic.data.author.name }}
+                            </TagBadge>
+                        </div>
 
                         <div v-if="comic?.data.titles.length > 0"
                              class="flex flex-wrap items-center gap-1.5">
