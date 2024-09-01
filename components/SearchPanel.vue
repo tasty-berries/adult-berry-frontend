@@ -29,6 +29,11 @@ const groups = computed(() => [{
     label   : 'Titles',
     commands: items.value?.data
                    .filter((item: any) => item.type === 'title') ?? []
+}, {
+    key     : 'authors',
+    label   : 'Authors',
+    commands: items.value?.data
+                   .filter((item: any) => item.type === 'author') ?? []
 }]);
 
 const model = ref();
@@ -52,6 +57,9 @@ watch(model, value => {
         case 'title':
             navigateTo(`/titles/${value.resource_id}-${slugify(value.name)}`);
             break;
+        case 'author':
+            navigateTo(`/authors/${value.resource_id}-${slugify(value.name)}`);
+            break;
     }
 });
 
@@ -70,7 +78,7 @@ watch(opened, value => {
 
 defineShortcuts({
     '/': {
-        handler   : () => {
+        handler: () => {
             opened.value = !opened.value;
         }
     }
