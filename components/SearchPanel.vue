@@ -69,7 +69,7 @@ watch(opened, value => {
 });
 
 defineShortcuts({
-    '?': {
+    '/': {
         handler   : () => {
             opened.value = !opened.value;
         }
@@ -79,7 +79,7 @@ defineShortcuts({
 
 <template>
     <div>
-        <UTooltip text="Search" :shortcuts="['Shift', '/']">
+        <UTooltip text="Search" :shortcuts="['/']">
             <UButton icon="i-tabler-search" variant="ghost" color="gray" @click="opened = true"/>
         </UTooltip>
 
