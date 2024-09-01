@@ -8,12 +8,12 @@ defineProps<{
     <UCard class="overflow-clip"
            :ui="{header: {padding: ''}, body: {padding: ''}}">
         <template #header>
-            <NuxtLink :to="`/comics/${item.id}/${slugify(item.title)}`">
+            <NuxtLink :to="`/comics/${item.id}-${slugify(item.title)}`">
                 <h3 class="font-semibold text-xl truncate px-4 py-5 sm:px-6">{{ item.title }}</h3>
             </NuxtLink>
         </template>
 
-        <NuxtLink :to="`/comics/${item.id}/${slugify(item.title)}`">
+        <NuxtLink :to="`/comics/${item.id}-${slugify(item.title)}`">
             <img :src="fileUrl(item.preview)" class="w-full h-full"/>
         </NuxtLink>
 

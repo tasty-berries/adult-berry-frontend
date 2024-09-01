@@ -28,7 +28,11 @@ const links = computed(() => [{
             </template>
 
             <template #right>
-                <UColorModeButton />
+                <SearchPanel/>
+
+                <UTooltip text="Color mode">
+                    <UColorModeButton/>
+                </UTooltip>
             </template>
         </UHeader>
 
