@@ -23,6 +23,10 @@ export default class AuthorRepository extends Repository {
         return this.client.getData<PaginatedCollection<any>>(`author.show.${id}.tags.index.${page}`, `/authors/${id}/tags?` + querify({page}).toString());
     }
 
+    public titles(id: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(`author.show.${id}.titles.index.${page}`, `/authors/${id}/titles?` + querify({page}).toString());
+    }
+
     public characterComics(authorId: number, characterId: number, page: number = 1) {
         return this.client.getData<PaginatedCollection<any>>(
             `author.show.${authorId}.characters.show.${characterId}.comics.index`,
@@ -34,6 +38,13 @@ export default class AuthorRepository extends Repository {
         return this.client.getData<PaginatedCollection<any>>(
             `author.show.${authorId}.tags.show.${tagId}.comics.index`,
             `/authors/${authorId}/tags/${tagId}?` + querify({page}).toString()
+        );
+    }
+
+    public titleComics(authorId: number, titleId: number, page: number = 1) {
+        return this.client.getData<PaginatedCollection<any>>(
+            `author.show.${authorId}.titles.show.${titleId}.comics.index`,
+            `/authors/${authorId}/titles/${titleId}?` + querify({page}).toString()
         );
     }
 }
