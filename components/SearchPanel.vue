@@ -18,7 +18,11 @@ const groups = computed(() => [{
     key     : 'characters',
     label   : 'Characters',
     commands: items.value?.data
-                   .filter((item: any) => item.type === 'character') ?? []
+                   .filter((item: any) => item.type === 'character')
+                   .map((item: any) => ({
+                       ...item,
+                       suffix: item.extra.title.length > 0 ? 'in ' + item.extra.title.join(', ') : ''
+                   })) ?? []
 }, {
     key     : 'tags',
     label   : 'Tags',
