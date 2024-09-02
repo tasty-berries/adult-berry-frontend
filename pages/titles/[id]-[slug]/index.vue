@@ -40,7 +40,9 @@ if (`${title.value?.data.id}-${slugify(title.value?.data.name)}` !== `${titleId}
 <template>
     <div>
         <UCard class="mb-2.5">
-            <h1 class="text-2xl font-semibold">{{ title?.data.name }}</h1>
+            <h3 class="text-xl font-semibold">{{ title?.data.name }}</h3>
+
+            <div v-if="title?.data.description" v-html="title?.data.description" class="mt-2.5"></div>
         </UCard>
 
         <UHorizontalNavigation :links="links"

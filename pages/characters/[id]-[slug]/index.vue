@@ -40,7 +40,19 @@ if (`${character.value?.data.id}-${slugify(character.value?.data.name)}` !== `${
 <template>
     <div>
         <UCard class="mb-2.5">
-            <h1 class="text-2xl font-semibold">{{ character?.data.name }}</h1>
+            <div class="flex gap-5">
+                <div v-if="character?.data.preview" class="w-[150px] h-[150px] shrink-0">
+                    <img :src="fileUrl(character.data.preview)"
+                         :alt="character.data.name"
+                         class="w-full h-full object-cover rounded-md"/>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold">{{ character?.data.name }}</h3>
+
+                    <div v-if="character?.data.description" v-html="character?.data.description" class="mt-2.5"></div>
+                </div>
+            </div>
         </UCard>
 
         <UHorizontalNavigation :links="links"

@@ -35,25 +35,8 @@ watch(page, (value, oldValue) => {
         </Head>
 
         <PaginatedCards v-if="characters" :items="characters" v-slot="{item}" v-model="page">
-            <NuxtLink :to="`/titles/${titleId}-${titleSlug}/characters/${item.id}-${slugify(item.name)}`">
-                <UCard class="overflow-clip"
-                       :ui="{body: {padding: ''}}">
-                    <template #header>
-                        <h3 class="font-semibold text-xl truncate">{{ item.name }}</h3>
-                    </template>
-
-                    <div v-for="comic in item.comics">
-                        <img :src="fileUrl(comic.preview)"/>
-                    </div>
-
-                    <template #footer>
-                        <p>
-                            <span class="font-semibold">Comics:</span>
-                            {{ item.comics_count }}
-                        </p>
-                    </template>
-                </UCard>
-            </NuxtLink>
+            <CharacterCard :item="item"
+                           :to="`/titles/${titleId}-${titleSlug}/characters/${item.id}-${slugify(item.name)}`"/>
         </PaginatedCards>
     </div>
 </template>
