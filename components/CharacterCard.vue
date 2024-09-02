@@ -16,7 +16,7 @@ defineProps<{
             <img v-if="item.preview"
                  :src="fileUrl(item.preview)"
                  :alt="item.name"
-                 class="w-full h-full object-cover"/>
+                 class="w-full h-full object-cover aspect-1"/>
 
             <img v-else-if="item.comics.length > 0"
                  :src="fileUrl(item.comics[0].preview)"

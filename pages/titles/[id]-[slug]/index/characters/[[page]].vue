@@ -26,6 +26,17 @@ watch(page, (value, oldValue) => {
 
     navigateTo(`/titles/${titleId}-${titleSlug}/characters/${value}`);
 });
+
+const groups = [{
+    label: 'Primary characters',
+    filter: (item: any) => item.role === 'primary'
+}, {
+    label: 'Secondary characters',
+    filter: (item: any) => item.role === 'secondary'
+}, {
+    label: 'Unclassified, crossovers and etc',
+    filter: (item: any) => item.role === null
+}];
 </script>
 
 <template>
@@ -34,7 +45,11 @@ watch(page, (value, oldValue) => {
             <title>{{ page > 1 ? `Page ${page} // ` : '' }}{{ title.name }} // Title characters</title>
         </Head>
 
-        <PaginatedCards v-if="characters" :items="characters" v-slot="{item}" v-model="page">
+        <PaginatedCards v-if="characters"
+                        :items="characters"
+                        :groups="groups"
+                        v-slot="{item}"
+                        v-model="page">
             <CharacterCard :item="item"
                            :to="`/titles/${titleId}-${titleSlug}/characters/${item.id}-${slugify(item.name)}`"/>
         </PaginatedCards>
