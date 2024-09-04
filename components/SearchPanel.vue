@@ -53,7 +53,9 @@ watch(model, value => {
             navigateTo(`/comics/${value.resource_id}-${slugify(value.name)}`);
             break;
         case 'character':
-            navigateTo(`/characters/${value.resource_id}-${slugify(value.name)}`);
+            const id = value.extra.hasOwnProperty('original') ? value.extra.original.id : value.resource_id;
+            const name = value.extra.hasOwnProperty('original') ? value.extra.original.name : value.name;
+            navigateTo(`/characters/${id}-${slugify(name)}`);
             break;
         case 'tag':
             navigateTo(`/tags/${value.resource_id}-${slugify(value.name)}`);

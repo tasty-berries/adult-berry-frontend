@@ -47,10 +47,19 @@ if (`${character.value?.data.id}-${slugify(character.value?.data.name)}` !== `${
                          class="w-full h-full object-cover rounded-md"/>
                 </div>
 
-                <div>
+                <div class="flex flex-col gap-1.5">
                     <h3 class="text-xl font-semibold">{{ character?.data.name }}</h3>
 
-                    <div v-if="character?.data.description" v-html="character?.data.description" class="mt-2.5"></div>
+                    <div v-if="character?.data.description" v-html="character?.data.description"></div>
+
+                    <div v-if="character?.data.aliases && character?.data.aliases.length > 0"
+                         class="flex flex-wrap items-center gap-1.5">
+                        <span class="font-semibold">A.k.a:</span>
+                        <TagBadge v-for="alias in character?.data.aliases"
+                                  :key="alias.id">
+                            {{ alias.name }}
+                        </TagBadge>
+                    </div>
                 </div>
             </div>
         </UCard>
