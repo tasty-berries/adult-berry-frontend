@@ -10,7 +10,23 @@ defineProps<{
         <UCard class="overflow-clip h-full flex flex-col"
                :ui="{body: {padding: '', base: 'grow'}}">
             <template #header>
-                <h3 class="font-semibold text-xl truncate">{{ item.name }}</h3>
+                <NuxtLink :to="to ?? `/titles/${item.id}-${slugify(item.name)}`"
+                          class="flex justify-between items-center gap-2.5 w-full">
+                    <h3 class="font-semibold text-xl truncate">{{ item.name }}</h3>
+
+                    <UPopover v-if="item.description" mode="hover" class="flex">
+                        <template #panel>
+                            <div class="text-sm p-2.5 max-w-64">
+                                <h5 class="font-semibold">{{ item.name }}</h5>
+
+                                <div v-html="item.description"></div>
+                            </div>
+                        </template>
+
+                        <UIcon name="i-ph-circle-wavy-question"
+                               class="text-2xl shrink-0"/>
+                    </UPopover>
+                </NuxtLink>
             </template>
 
             <img v-if="item.preview"
