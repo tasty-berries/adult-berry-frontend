@@ -40,9 +40,19 @@ if (`${title.value?.data.id}-${slugify(title.value?.data.name)}` !== `${titleId}
 <template>
     <div>
         <UCard class="mb-2.5">
-            <h3 class="text-xl font-semibold">{{ title?.data.name }}</h3>
+            <div class="flex gap-5">
+                <div v-if="title?.data.preview" class="w-[150px] aspect-16/9 shrink-0">
+                    <img :src="fileUrl(title.data.preview)"
+                         :alt="title.data.name"
+                         class="w-full h-full object-cover rounded-md"/>
+                </div>
 
-            <div v-if="title?.data.description" v-html="title?.data.description" class="mt-2.5"></div>
+                <div>
+                    <h3 class="text-xl font-semibold">{{ title?.data.name }}</h3>
+
+                    <div v-if="title?.data.description" v-html="title?.data.description" class="mt-2.5"></div>
+                </div>
+            </div>
         </UCard>
 
         <UHorizontalNavigation :links="links"
