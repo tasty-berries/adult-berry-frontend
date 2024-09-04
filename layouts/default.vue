@@ -26,6 +26,8 @@ const links = computed(() => [{
 
 <template>
     <div>
+        <NuxtLoadingIndicator/>
+
         <UHeader :links="links">
             <template #logo>
                 Adult Berry
