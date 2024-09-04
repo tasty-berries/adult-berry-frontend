@@ -7,10 +7,10 @@ defineProps<{
 
 <template>
     <UCard class="overflow-clip h-full flex flex-col"
-           :ui="{body: {padding: '', base: 'grow'}}">
+           :ui="{header: {padding: ''}, body: {padding: '', base: 'grow'}}">
         <template #header>
             <NuxtLink :to="to ?? `/titles/${item.id}-${slugify(item.name)}`"
-                      class="flex justify-between items-center gap-2.5 w-full">
+                      class="flex justify-between items-center gap-2.5 w-full px-4 py-5 sm:px-6">
                 <h3 class="font-semibold text-xl truncate">{{ item.name }}</h3>
 
                 <UPopover v-if="item.description" mode="hover" class="flex">
