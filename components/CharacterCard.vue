@@ -15,10 +15,10 @@ defineProps<{
 
                 <UPopover v-if="item.description" mode="hover" class="flex">
                     <template #panel>
-                        <div class="text-sm p-2.5 max-w-64">
+                        <div class="p-2.5 max-w-64">
                             <h5 class="font-semibold">{{ item.name }}</h5>
 
-                            <div v-html="item.description"></div>
+                            <div v-html="item.description" class="[&>p>strong]:font-semibold text-sm"></div>
                         </div>
                     </template>
 
