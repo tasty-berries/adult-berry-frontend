@@ -15,10 +15,28 @@ defineProps<{
 
                 <UPopover v-if="item.description" mode="hover" class="flex">
                     <template #panel>
-                        <div class="p-2.5 max-w-64">
+                        <div class="p-2.5 max-w-64 flex flex-col gap-1">
                             <h5 class="font-semibold">{{ item.name }}</h5>
 
                             <div v-html="item.description" class="[&>p>strong]:font-semibold text-sm"></div>
+
+                            <div v-if="item.aliases && item.aliases.length > 0"
+                                 class="flex flex-wrap items-center gap-1.5 text-sm">
+                                <span class="font-semibold">A.k.a:</span>
+                                <TagBadge v-for="alias in item.aliases"
+                                          :key="alias.id">
+                                    {{ alias.name }}
+                                </TagBadge>
+                            </div>
+
+                            <div v-if="item.titles && item.titles.length > 0"
+                                 class="flex flex-wrap items-center gap-1.5 text-sm">
+                                <span class="font-semibold">Titles:</span>
+                                <TagBadge v-for="title in item.titles"
+                                          :key="title.id">
+                                    {{ title.name }}
+                                </TagBadge>
+                            </div>
                         </div>
                     </template>
 
@@ -45,15 +63,6 @@ defineProps<{
                 <span class="font-semibold">Comics:</span>
                 {{ item.comics_count }}
             </p>
-
-            <div v-if="item.aliases && item.aliases.length > 0"
-                 class="flex flex-wrap items-center gap-1.5">
-                <span class="font-semibold">A.k.a:</span>
-                <TagBadge v-for="alias in item.aliases"
-                          :key="alias.id">
-                    {{ alias.name }}
-                </TagBadge>
-            </div>
         </template>
     </UCard>
 </template>
