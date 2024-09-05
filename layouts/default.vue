@@ -25,7 +25,7 @@ const links = computed(() => [{
 </script>
 
 <template>
-    <div>
+    <div class="bg-gray-100 dark:bg-gray-950">
         <NuxtLoadingIndicator/>
 
         <UHeader :links="links">
