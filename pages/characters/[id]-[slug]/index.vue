@@ -60,6 +60,16 @@ if (`${character.value?.data.id}-${slugify(character.value?.data.name)}` !== `${
                             {{ alias.name }}
                         </TagBadge>
                     </div>
+
+                    <div v-if="character?.data.titles && character?.data.titles.length > 0"
+                         class="flex flex-wrap items-center gap-1.5">
+                        <span class="font-semibold">Titles:</span>
+                        <TagBadge v-for="title in character?.data.titles"
+                                  :key="title.id"
+                                  :to="`/titles/${title.id}-${slugify(title.name)}`">
+                            {{ title.name }}
+                        </TagBadge>
+                    </div>
                 </div>
             </div>
         </UCard>
