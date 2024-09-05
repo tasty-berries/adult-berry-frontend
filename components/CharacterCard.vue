@@ -53,10 +53,10 @@ defineProps<{
                  :alt="item.name"
                  class="w-full h-full object-cover aspect-1"/>
 
-            <img v-else-if="item.comics.length > 0"
-                 :src="fileUrl(item.comics[0].preview)"
-                 :alt="item.name"
-                 class="w-full h-full object-cover"/>
+            <AdultImage v-else-if="item.comics.length > 0"
+                        :src="fileUrl(item.comics[0].preview)"
+                        :alt="item.name"
+                        class="w-full h-full object-cover"/>
         </NuxtLink>
 
         <template #footer>

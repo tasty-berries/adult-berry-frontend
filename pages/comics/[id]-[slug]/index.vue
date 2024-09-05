@@ -18,6 +18,8 @@ const {data: comic} = await repo.show(id);
 
 if (slugify(comic.value?.data.title) !== slug)
     await navigateTo(`/comics/${id}/${slugify(comic.value?.data.title)}`);
+
+const viewAccepted = useCookie<boolean | undefined>('viewAccepted', {default: () => undefined});
 </script>
 
 <template>
@@ -29,8 +31,11 @@ if (slugify(comic.value?.data.title) !== slug)
         <UCard :ui="{body: {padding: ''}}">
             <template #header>
                 <div class="flex gap-5">
-                    <div class="w-[110px] h-[150px] bg-contain bg-center bg-no-repeat"
-                         :style="`background-image: url(${fileUrl(comic?.data.preview)})`"></div>
+                    <div class="overflow-hidden">
+                        <div class="w-[110px] h-[150px] bg-contain bg-center bg-no-repeat"
+                             :class="{blur: !viewAccepted}"
+                             :style="`background-image: url(${fileUrl(comic?.data.preview)})`"></div>
+                    </div>
 
                     <div class="flex flex-col gap-1.5">
                         <h1 class="font-semibold text-2xl">{{ comic?.data.title }}</h1>
@@ -73,7 +78,10 @@ if (slugify(comic.value?.data.title) !== slug)
                        :next-button="{icon: 'i-heroicons-chevron-right', color: 'emerald'}"
                        arrows>
                 <template #default="{item}">
-                    <img :src="item" class="w-full max-h-[800px] object-contain" draggable="false" alt=""/>
+                    <AdultImage :src="item"
+                                class="object-contain"
+                                :wrapper="{class: 'w-full max-h-[800px]'}"
+                                draggable="false"/>
                 </template>
             </UCarousel>
 

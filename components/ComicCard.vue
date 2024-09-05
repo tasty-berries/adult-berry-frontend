@@ -14,7 +14,7 @@ defineProps<{
         </template>
 
         <NuxtLink :to="`/comics/${item.id}-${slugify(item.title)}`">
-            <img :src="fileUrl(item.preview)" class="w-full h-full"/>
+            <AdultImage :src="fileUrl(item.preview)" class="w-full h-full"/>
         </NuxtLink>
 
         <template #footer>

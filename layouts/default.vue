@@ -22,6 +22,8 @@ const links = computed(() => [{
     to    : '/authors',
     active: route.path.startsWith('/authors')
 }]);
+
+const viewAccepted = useCookie<boolean|undefined>('viewAccepted', {default: () => undefined});
 </script>
 
 <template>
@@ -61,6 +63,32 @@ const links = computed(() => [{
                 </UTooltip>
             </template>
         </UFooter>
+
+        <UModal :model-value="viewAccepted === undefined">
+            <UCard :ui="{ring: ''}">
+                <template #header>
+                    <h3 class="font-semibold text-lg">Attention!</h3>
+                </template>
+
+                <p>
+                    The site contains adult materials. If you are not ready to view such content, please close the site.
+                    All responsibility for possible problems during and after viewing remains solely with you.
+                </p>
+
+                <template #footer>
+                    <div class="flex gap-2.5 justify-end">
+                        <UButton color="gray"
+                                 label="Okay, let's go!"
+                                 @click="viewAccepted = true"/>
+
+                        <UButton color="red"
+                                 label="No, thanks"
+                                 tabindex="1"
+                                 @click="viewAccepted = false"/>
+                    </div>
+                </template>
+            </UCard>
+        </UModal>
     </div>
 </template>
 
