@@ -41,6 +41,13 @@ const viewAccepted = useCookie<boolean|undefined>('viewAccepted', {default: () =
                 <UTooltip text="Color mode">
                     <UColorModeButton/>
                 </UTooltip>
+
+                <UTooltip text="Adult settings">
+                    <UButton icon="i-uil-18-plus"
+                             variant="ghost"
+                             color="gray"
+                             @click="viewAccepted = undefined"/>
+                </UTooltip>
             </template>
         </UHeader>
 
