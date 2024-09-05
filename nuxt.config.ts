@@ -10,5 +10,11 @@ export default defineNuxtConfig({
             apiUrl  : 'http://adultberry.vrkitty.ru/api',
             assetUrl: 'http://adultberry.vrkitty.ru/storage'
         }
+    },
+
+    app: {
+        head: {
+            link: [{rel: 'icon', href: '/img/icon.png'}]
+        }
     }
 })
