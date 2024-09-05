@@ -29,13 +29,13 @@ watch(page, (value, oldValue) => {
 
 const groups = [{
     label: 'Primary characters',
-    filter: (item: any) => item.role === 'primary'
+    filter: (item: any) => item.role === 'primary' && item.titles.find((title: any) => title.id === titleId) !== undefined
 }, {
     label: 'Secondary characters',
-    filter: (item: any) => item.role === 'secondary'
+    filter: (item: any) => item.role === 'secondary' && item.titles.find((title: any) => title.id === titleId) !== undefined
 }, {
     label: 'Unclassified, crossovers and etc',
-    filter: (item: any) => item.role === null
+    filter: (item: any) => item.role === null || item.titles.find((title: any) => title.id === titleId) === undefined
 }];
 </script>
 
