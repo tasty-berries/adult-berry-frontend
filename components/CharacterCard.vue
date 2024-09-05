@@ -13,7 +13,8 @@ defineProps<{
                       class="flex justify-between items-center gap-2.5 w-full px-4 py-5 sm:px-6">
                 <h3 class="font-semibold text-xl truncate">{{ item.name }}</h3>
 
-                <UPopover v-if="item.description" mode="hover" class="flex">
+                <UPopover v-if="item.description || (item.aliases && item.aliases.length > 0) || (item.titles && item.titles.length > 0)"
+                          mode="hover" class="flex">
                     <template #panel>
                         <div class="p-2.5 max-w-64 flex flex-col gap-1">
                             <h5 class="font-semibold">{{ item.name }}</h5>
