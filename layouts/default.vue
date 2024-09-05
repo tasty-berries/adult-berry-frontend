@@ -25,7 +25,7 @@ const links = computed(() => [{
 </script>
 
 <template>
-    <div class="bg-gray-100 dark:bg-gray-950">
+    <div class="bg-gray-100 dark:bg-gray-950 min-h-dvh flex flex-col">
         <NuxtLoadingIndicator/>
 
         <UHeader :links="links">
@@ -42,9 +42,25 @@ const links = computed(() => [{
             </template>
         </UHeader>
 
-        <UContainer class="py-5">
+        <UContainer class="py-5 grow">
             <NuxtPage/>
         </UContainer>
+
+        <UFooter>
+            <template #left>
+                Copyright &copy; {{ new Date().getFullYear() }}
+            </template>
+
+            <template #right>
+                <UTooltip text="Source code">
+                    <UButton icon="i-simple-icons-github"
+                             color="gray"
+                             variant="ghost"
+                             to="https://github.com/tasty-berries"
+                             target="_blank"/>
+                </UTooltip>
+            </template>
+        </UFooter>
     </div>
 </template>
 
