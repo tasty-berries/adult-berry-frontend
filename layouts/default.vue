@@ -26,6 +26,7 @@ const links = computed(() => [{
 }]);
 
 const viewAccepted   = useCookie<boolean | undefined>('viewAccepted', {default: () => undefined});
+
 const allowedContent = useCookie<AllowedContent>('allowedContent', {
     default: () => ({
         vanilla: true,
@@ -38,6 +39,7 @@ const allowedContent = useCookie<AllowedContent>('allowedContent', {
 });
 
 const showAllowedContent = ref<boolean>(false);
+const enabledAllowedContent = computed(() => Object.values(allowedContent.value).filter(Boolean).length);
 </script>
 
 <template>
@@ -67,7 +69,7 @@ const showAllowedContent = ref<boolean>(false);
 
         <UContainer class="py-5 grow w-full">
             <div class="mb-5">
-                <UButton label="Allowed content"
+                <UButton :label="`Allowed content: ` + (enabledAllowedContent === Object.keys(allowedContent).length ? 'All' : enabledAllowedContent)"
                          color="gray"
                          :icon="showAllowedContent ? 'i-heroicons-chevron-down' : 'i-heroicons-cog-6-tooth'"
                          @click="showAllowedContent = !showAllowedContent"/>
