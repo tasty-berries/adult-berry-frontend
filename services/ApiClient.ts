@@ -35,6 +35,7 @@ export default class ApiClient {
                 Accept           : 'application/json',
                 'Allowed-Content': [
                     ...allowedContent.value.vanilla ? ['vanilla'] : [],
+                    ...allowedContent.value.gay ? ['gay'] : [],
                     ...allowedContent.value.furry ? ['furry'] : [],
                     ...allowedContent.value.lolycon ? ['lolycon'] : [],
                     ...allowedContent.value.lesbian ? ['lesbian'] : [],

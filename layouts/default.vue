@@ -25,11 +25,12 @@ const links = computed(() => [{
     active: route.path.startsWith('/authors')
 }]);
 
-const viewAccepted   = useCookie<boolean | undefined>('viewAccepted', {default: () => undefined});
+const viewAccepted = useCookie<boolean | undefined>('viewAccepted', {default: () => undefined});
 
 const allowedContent = useCookie<AllowedContent>('allowedContent', {
     default: () => ({
         vanilla: true,
+        gay    : true,
         furry  : true,
         lolycon: true,
         lesbian: true,
@@ -38,7 +39,7 @@ const allowedContent = useCookie<AllowedContent>('allowedContent', {
     })
 });
 
-const showAllowedContent = ref<boolean>(false);
+const showAllowedContent    = ref<boolean>(false);
 const enabledAllowedContent = computed(() => Object.values(allowedContent.value).filter(Boolean).length);
 </script>
 
@@ -69,16 +70,22 @@ const enabledAllowedContent = computed(() => Object.values(allowedContent.value)
 
         <UContainer class="py-5 grow w-full">
             <div class="mb-5">
-                <UButton :label="`Allowed content: ` + (enabledAllowedContent === Object.keys(allowedContent).length ? 'All' : enabledAllowedContent)"
-                         color="gray"
-                         :icon="showAllowedContent ? 'i-heroicons-chevron-down' : 'i-heroicons-cog-6-tooth'"
-                         @click="showAllowedContent = !showAllowedContent"/>
+                <UButton
+                    :label="`Allowed content: ` + (enabledAllowedContent === Object.keys(allowedContent).length ? 'All' : enabledAllowedContent)"
+                    color="gray"
+                    :icon="showAllowedContent ? 'i-heroicons-chevron-down' : 'i-heroicons-cog-6-tooth'"
+                    @click="showAllowedContent = !showAllowedContent"/>
 
                 <div v-if="showAllowedContent" class="flex flex-wrap items-center gap-2.5 mt-2.5">
                     <UButton color="gray"
                              :variant="allowedContent.vanilla ? 'solid' : 'ghost'"
                              label="Vanilla"
                              @click="allowedContent.vanilla = !allowedContent.vanilla"/>
+
+                    <UButton color="gray"
+                             :variant="allowedContent.gay ? 'solid' : 'ghost'"
+                             label="Gay"
+                             @click="allowedContent.gay = !allowedContent.gay"/>
 
                     <UButton color="gray"
                              :variant="allowedContent.furry ? 'solid' : 'ghost'"
