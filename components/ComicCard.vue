@@ -5,8 +5,8 @@ defineProps<{
 </script>
 
 <template>
-    <UCard class="overflow-clip"
-           :ui="{header: {padding: ''}, body: {padding: ''}}">
+    <UCard class="overflow-clip flex flex-col h-full"
+           :ui="{header: {padding: ''}, body: {padding: '', base: 'grow'}}">
         <template #header>
             <NuxtLink :to="`/comics/${item.id}-${slugify(item.title)}`">
                 <h3 class="font-semibold text-xl truncate px-4 py-5 sm:px-6">{{ item.title }}</h3>
@@ -14,7 +14,9 @@ defineProps<{
         </template>
 
         <NuxtLink :to="`/comics/${item.id}-${slugify(item.title)}`">
-            <AdultImage :src="fileUrl(item.preview)" class="w-full h-full"/>
+            <AdultImage :src="fileUrl(item.preview)"
+                        :wrapper="{class: 'h-full'}"
+                        class="w-full h-full object-cover"/>
         </NuxtLink>
 
         <template #footer>

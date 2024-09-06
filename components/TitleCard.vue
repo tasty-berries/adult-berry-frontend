@@ -37,6 +37,7 @@ defineProps<{
             <AdultImage v-else-if="item.comics.length > 0"
                         :src="fileUrl(item.comics[0].preview)"
                         :alt="item.name"
+                        :wrapper="{class: 'h-full'}"
                         class="w-full h-full object-cover"/>
         </NuxtLink>
 
