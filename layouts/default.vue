@@ -36,6 +36,8 @@ const allowedContent = useCookie<AllowedContent>('allowedContent', {
         zoo    : true
     })
 });
+
+const showAllowedContent = ref<boolean>(false);
 </script>
 
 <template>
@@ -65,9 +67,12 @@ const allowedContent = useCookie<AllowedContent>('allowedContent', {
 
         <UContainer class="py-5 grow w-full">
             <div class="mb-5">
-                <p class="mb-1.5 font-semibold">Allowed content</p>
+                <UButton label="Allowed content"
+                         color="gray"
+                         :icon="showAllowedContent ? 'i-heroicons-chevron-down' : 'i-heroicons-cog-6-tooth'"
+                         @click="showAllowedContent = !showAllowedContent"/>
 
-                <div class="flex flex-wrap items-center gap-2.5">
+                <div v-if="showAllowedContent" class="flex flex-wrap items-center gap-2.5 mt-2.5">
                     <UButton color="gray"
                              :variant="allowedContent.vanilla ? 'solid' : 'ghost'"
                              label="Vanilla"
