@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AuthorRepository from "~/repos/AuthorRepository";
+import type AllowedContent from "~/types/options/AllowedContent";
 
 definePageMeta({
     validate: async (route) => {
@@ -11,7 +12,7 @@ const repo      = new AuthorRepository();
 const routePage = parseInt(useRoute().params.page as string);
 const page      = ref<number>(routePage ? routePage : 1);
 
-const {data: authors} = await repo.index(page.value);
+const {data: authors, refresh} = await repo.index(page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
@@ -19,6 +20,9 @@ watch(page, (value, oldValue) => {
 
     navigateTo(`/authors/${value}`);
 });
+
+const allowedContent = useCookie<AllowedContent>('allowedContent');
+watch(allowedContent, () => refresh());
 </script>
 
 <template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TitleRepository from "~/repos/TitleRepository";
 import TagRepository from "~/repos/TagRepository";
+import type AllowedContent from "~/types/options/AllowedContent";
 
 definePageMeta({
     validate: async (route) => {
@@ -22,9 +23,9 @@ const tagSlug   = route.params.tag_slug as string;
 const routePage = parseInt(route.params.page as string);
 const page      = ref<number>(routePage ? routePage : 1);
 
-const {data: title}  = await titleRepo.show(titleId);
-const {data: tag}    = await tagRepo.show(tagId);
-const {data: comics} = await titleRepo.tagComics(titleId, tagId, page.value);
+const {data: title}           = await titleRepo.show(titleId);
+const {data: tag}             = await tagRepo.show(tagId);
+const {data: comics, refresh} = await titleRepo.tagComics(titleId, tagId, page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
@@ -39,13 +40,15 @@ if (
     `${titleId}-${titleSlug}/${tagId}-${tagSlug}`
 )
     await navigateTo(`/titles/${title.value?.data.id}-${slugify(title.value?.data.name)}/tags/${tag.value?.data.id}-${slugify(tag.value?.data.name)}`);
+
+const allowedContent = useCookie<AllowedContent>('allowedContent');
+watch(allowedContent, () => refresh());
 </script>
 
 <template>
     <div>
         <Head>
-            <title>{{ page > 1 ? `Page ${page} // ` : '' }}{{ tag?.data.name }} in {{ title?.data.name }} // Tag comics
-                in title</title>
+            <title>{{ page > 1 ? `Page ${page} // ` : '' }}{{ tag?.data.name }} in {{ title?.data.name }} // Tag comics in title</title>
         </Head>
 
         <UCard class="mb-5">

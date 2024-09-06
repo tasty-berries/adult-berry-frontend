@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CharacterRepository from "~/repos/CharacterRepository";
 import TagRepository from "~/repos/TagRepository";
+import type AllowedContent from "~/types/options/AllowedContent";
 
 definePageMeta({
     validate: async (route) => {
@@ -22,9 +23,9 @@ const tagSlug       = route.params.tag_slug as string;
 const routePage     = parseInt(route.params.page as string);
 const page          = ref<number>(routePage ? routePage : 1);
 
-const {data: character} = await characterRepo.show(characterId);
-const {data: tag}       = await tagRepo.show(tagId);
-const {data: comics}    = await characterRepo.tagComics(characterId, tagId, page.value);
+const {data: character}       = await characterRepo.show(characterId);
+const {data: tag}             = await tagRepo.show(tagId);
+const {data: comics, refresh} = await characterRepo.tagComics(characterId, tagId, page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
@@ -39,6 +40,9 @@ if (
     `${characterId}-${characterSlug}/${tagId}-${tagSlug}`
 )
     await navigateTo(`/characters/${character.value?.data.id}-${slugify(character.value?.data.name)}/tags/${tag.value?.data.id}-${slugify(tag.value?.data.name)}`);
+
+const allowedContent = useCookie<AllowedContent>('allowedContent');
+watch(allowedContent, () => refresh());
 </script>
 
 <template>

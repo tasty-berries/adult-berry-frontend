@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CharacterRepository from "~/repos/CharacterRepository";
 import TitleRepository from "~/repos/TitleRepository";
+import type AllowedContent from "~/types/options/AllowedContent";
 
 definePageMeta({
     validate: async (route) => {
@@ -22,9 +23,9 @@ const characterSlug = route.params.character_slug as string;
 const routePage     = parseInt(route.params.page as string);
 const page          = ref<number>(routePage ? routePage : 1);
 
-const {data: title}     = await titleRepo.show(titleId);
-const {data: character} = await characterRepo.show(characterId);
-const {data: comics}    = await titleRepo.characterComics(titleId, characterId, page.value);
+const {data: title}           = await titleRepo.show(titleId);
+const {data: character}       = await characterRepo.show(characterId);
+const {data: comics, refresh} = await titleRepo.characterComics(titleId, characterId, page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
@@ -39,6 +40,9 @@ if (
     `${titleId}-${titleSlug}/${characterId}-${characterSlug}`
 )
     await navigateTo(`/titles/${title.value?.data.id}-${slugify(title.value?.data.name)}/characters/${character.value?.data.id}-${slugify(character.value?.data.name)}`);
+
+const allowedContent = useCookie<AllowedContent>('allowedContent');
+watch(allowedContent, () => refresh());
 </script>
 
 <template>

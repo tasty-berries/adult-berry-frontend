@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TagRepository from "~/repos/TagRepository";
+import type AllowedContent from "~/types/options/AllowedContent";
 
 definePageMeta({
     validate: async (route) => {
@@ -18,7 +19,7 @@ const tagId     = parseInt(route.params.id as string);
 const tagSlug   = route.params.slug as string;
 const page      = ref<number>(routePage ? routePage : 1);
 
-const {data: characters} = await repo.characters(tagId, page.value);
+const {data: characters, refresh} = await repo.characters(tagId, page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
@@ -26,6 +27,9 @@ watch(page, (value, oldValue) => {
 
     navigateTo(`/tags/${tagId}-${tagSlug}/characters/${value}`);
 });
+
+const allowedContent = useCookie<AllowedContent>('allowedContent');
+watch(allowedContent, () => refresh());
 </script>
 
 <template>

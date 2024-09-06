@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ComicRepository from "~/repos/ComicRepository";
+import type AllowedContent from "~/types/options/AllowedContent";
 
 definePageMeta({
     validate: async (route) => {
@@ -11,7 +12,7 @@ const repo      = new ComicRepository();
 const routePage = parseInt(useRoute().params.page as string);
 const page      = ref<number>(routePage ? routePage : 1);
 
-const {data: comics} = await repo.index(page.value);
+const {data: comics, refresh} = await repo.index(page.value);
 
 watch(page, (value, oldValue) => {
     if (value === oldValue)
@@ -19,6 +20,10 @@ watch(page, (value, oldValue) => {
 
     navigateTo(`/${value}`);
 });
+
+
+const allowedContent = useCookie<AllowedContent>('allowedContent');
+watch(allowedContent, () => refresh());
 </script>
 
 <template>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type AllowedContent from "~/types/options/AllowedContent";
+
 const route = useRoute();
 
 const links = computed(() => [{
@@ -23,7 +25,17 @@ const links = computed(() => [{
     active: route.path.startsWith('/authors')
 }]);
 
-const viewAccepted = useCookie<boolean|undefined>('viewAccepted', {default: () => undefined});
+const viewAccepted   = useCookie<boolean | undefined>('viewAccepted', {default: () => undefined});
+const allowedContent = useCookie<AllowedContent>('allowedContent', {
+    default: () => ({
+        vanilla: true,
+        furry  : true,
+        lolycon: true,
+        lesbian: true,
+        incest : true,
+        zoo    : true
+    })
+});
 </script>
 
 <template>
@@ -51,7 +63,43 @@ const viewAccepted = useCookie<boolean|undefined>('viewAccepted', {default: () =
             </template>
         </UHeader>
 
-        <UContainer class="py-5 grow">
+        <UContainer class="py-5 grow w-full">
+            <div class="mb-5">
+                <p class="mb-1.5 font-semibold">Allowed content</p>
+
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <UButton color="gray"
+                             :variant="allowedContent.vanilla ? 'solid' : 'ghost'"
+                             label="Vanilla"
+                             @click="allowedContent.vanilla = !allowedContent.vanilla"/>
+
+                    <UButton color="gray"
+                             :variant="allowedContent.furry ? 'solid' : 'ghost'"
+                             label="Furry"
+                             @click="allowedContent.furry = !allowedContent.furry"/>
+
+                    <UButton color="gray"
+                             :variant="allowedContent.lolycon ? 'solid' : 'ghost'"
+                             label="Lolycon"
+                             @click="allowedContent.lolycon = !allowedContent.lolycon"/>
+
+                    <UButton color="gray"
+                             :variant="allowedContent.lesbian ? 'solid' : 'ghost'"
+                             label="Lesbian"
+                             @click="allowedContent.lesbian = !allowedContent.lesbian"/>
+
+                    <UButton color="gray"
+                             :variant="allowedContent.incest ? 'solid' : 'ghost'"
+                             label="Incest"
+                             @click="allowedContent.incest = !allowedContent.incest"/>
+
+                    <UButton color="gray"
+                             :variant="allowedContent.zoo ? 'solid' : 'ghost'"
+                             label="Zoo"
+                             @click="allowedContent.zoo = !allowedContent.zoo"/>
+                </div>
+            </div>
+
             <NuxtPage/>
         </UContainer>
 

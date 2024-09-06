@@ -1,3 +1,5 @@
+import AllowedContent from "~/types/options/AllowedContent";
+
 export default class ApiClient {
     private buildFormData(data: any): FormData {
         const form = new FormData();
@@ -17,8 +19,9 @@ export default class ApiClient {
     }
 
     public get<Type>(request: string): Promise<Type> {
-        const config = useRuntimeConfig();
-        const token  = useCookie('token');
+        const config         = useRuntimeConfig();
+        const token          = useCookie('token');
+        const allowedContent = useCookie<AllowedContent>('allowedContent');
 
         const headers: any = {};
 
@@ -29,7 +32,15 @@ export default class ApiClient {
         return $fetch<Type>(request, {
             baseURL: config.public.apiUrl,
             headers: {
-                Accept: 'application/json',
+                Accept           : 'application/json',
+                'Allowed-Content': [
+                    ...allowedContent.value.vanilla ? ['vanilla'] : [],
+                    ...allowedContent.value.furry ? ['furry'] : [],
+                    ...allowedContent.value.lolycon ? ['lolycon'] : [],
+                    ...allowedContent.value.lesbian ? ['lesbian'] : [],
+                    ...allowedContent.value.incest ? ['incest'] : [],
+                    ...allowedContent.value.zoo ? ['zoo'] : [],
+                ].join(','),
                 ...headers
             }
         });

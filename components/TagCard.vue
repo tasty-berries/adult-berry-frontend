@@ -15,7 +15,7 @@ defineProps<{
             </NuxtLink>
         </template>
 
-        <NuxtLink :to="to ?? `/tags/${item.id}-${slugify(item.name)}`">
+        <NuxtLink v-if="item.comics.length > 0" :to="to ?? `/tags/${item.id}-${slugify(item.name)}`">
             <AdultImage :src="fileUrl(item.comics[0].preview)"
                         :alt="item.name"
                         class="w-full h-full object-cover"/>
