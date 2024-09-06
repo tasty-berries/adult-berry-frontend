@@ -21,7 +21,17 @@ export default class ApiClient {
     public get<Type>(request: string): Promise<Type> {
         const config         = useRuntimeConfig();
         const token          = useCookie('token');
-        const allowedContent = useCookie<AllowedContent>('allowedContent');
+        const allowedContent = useCookie<AllowedContent>('allowedContent', {
+            default: () => ({
+                vanilla: true,
+                gay    : true,
+                furry  : true,
+                lolycon: true,
+                lesbian: true,
+                incest : true,
+                zoo    : true
+            })
+        });
 
         const headers: any = {};
 
