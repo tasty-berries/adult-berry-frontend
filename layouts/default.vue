@@ -25,7 +25,10 @@ const links = computed(() => [{
     active: route.path.startsWith('/authors')
 }]);
 
-const viewAccepted = useCookie<boolean | undefined>('viewAccepted', {default: () => undefined});
+const viewAccepted = useCookie<boolean | undefined>(
+    'viewAccepted',
+    {default: () => undefined, expires: new Date(Date.now() + 24 * 3600 * 365 * 1000)}
+);
 
 const allowedContent = useCookie<AllowedContent>('allowedContent', {
     default: () => ({

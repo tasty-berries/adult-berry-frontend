@@ -19,7 +19,10 @@ const {data: comic} = await repo.show(id);
 if (slugify(comic.value?.data.title) !== slug)
     await navigateTo(`/comics/${id}/${slugify(comic.value?.data.title)}`);
 
-const viewAccepted = useCookie<boolean | undefined>('viewAccepted', {default: () => undefined});
+const viewAccepted = useCookie<boolean | undefined>(
+    'viewAccepted',
+    {default: () => undefined, expires: new Date(Date.now() + 24 * 3600 * 365 * 1000)}
+);
 </script>
 
 <template>
